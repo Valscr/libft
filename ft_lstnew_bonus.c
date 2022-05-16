@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 04:09:48 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/04/26 18:14:31 by vescaffr         ###   ########.fr       */
+/*   Created: 2022/04/28 22:21:53 by vescaffr          #+#    #+#             */
+/*   Updated: 2022/05/04 12:08:24 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <limits.h>
 
-void	*ft_calloc(size_t count, size_t size)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	i;
-	void	*dst;
+	t_list	*new;
 
-	i = size * count;
-	dst = malloc(i);
-	if (!dst || ((count > 65536) && (size > 65536)))
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
 		return (0);
-	ft_memset(dst, 0, i);
-	return (dst);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }
-
-/*int	main()
-{
-	ft_calloc(SIZE_MAX, SIZE_MAX);
-	printf("\n");
-}*/

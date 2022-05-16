@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 04:09:48 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/04/26 18:14:31 by vescaffr         ###   ########.fr       */
+/*   Created: 2022/05/02 21:53:52 by vescaffr          #+#    #+#             */
+/*   Updated: 2022/05/02 23:30:24 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <limits.h>
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	size_t	i;
-	void	*dst;
-
-	i = size * count;
-	dst = malloc(i);
-	if (!dst || ((count > 65536) && (size > 65536)))
-		return (0);
-	ft_memset(dst, 0, i);
-	return (dst);
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }
-
-/*int	main()
-{
-	ft_calloc(SIZE_MAX, SIZE_MAX);
-	printf("\n");
-}*/

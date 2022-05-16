@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 04:09:48 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/04/26 18:14:31 by vescaffr         ###   ########.fr       */
+/*   Created: 2022/04/28 17:58:08 by vescaffr          #+#    #+#             */
+/*   Updated: 2022/04/30 03:18:03 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <limits.h>
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_putchar(char c, int fd)
 {
-	size_t	i;
-	void	*dst;
-
-	i = size * count;
-	dst = malloc(i);
-	if (!dst || ((count > 65536) && (size > 65536)))
-		return (0);
-	ft_memset(dst, 0, i);
-	return (dst);
+	write(fd, &c, 1);
 }
 
-/*int	main()
+void	ft_putnbr_fd(int n, int fd)
 {
-	ft_calloc(SIZE_MAX, SIZE_MAX);
-	printf("\n");
-}*/
+	long	nb;
+
+	nb = n;
+	if (nb < 0)
+	{
+		nb *= -1;
+		ft_putchar('-', fd);
+	}
+	if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
+	else
+		ft_putchar(nb + 48, fd);
+}

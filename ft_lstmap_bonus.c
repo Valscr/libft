@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 04:29:56 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/05/16 14:23:16 by vescaffr         ###   ########.fr       */
+/*   Created: 2022/05/02 22:03:41 by vescaffr          #+#    #+#             */
+/*   Updated: 2022/05/04 17:53:59 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	h;
-	size_t	n;
+	t_list	*new;
+	t_list	*tmp;
+	t_list	*dest;
 
-	h = 0;
-	if (needle[0] == '\0' || haystack == 0)
-		return ((char *)haystack);
-	while (haystack[h] != '\0')
+	if (lst)
 	{
-		n = 0;
-		while (haystack[h + n] == needle[n] && (h + n) < len)
+		tmp = lst;
+		dest = ft_lstnew(f(tmp->content));
+		if (!dest)
+			return (NULL);
+		tmp = tmp->next;
+		while (tmp)
 		{
-			if (haystack[h + n] == '\0' && needle[n] == '\0')
-				return ((char *)&haystack[h]);
-			n++;
+			new = ft_lstnew(f(tmp->content));
+			if (!new)
+			{
+				ft_lstclear(&dest, del);
+				return (NULL);
+			}
+			ft_lstadd_back(&dest, new);
+			tmp = tmp->next;
 		}
-		if (needle[n] == '\0')
-			return ((char *)haystack + h);
-		h++;
+		return (dest);
 	}
-	return (0);
+	return (NULL);
 }

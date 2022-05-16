@@ -6,15 +6,15 @@
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 04:34:46 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/04/22 04:34:49 by vescaffr         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:35:02 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isascii(unsigned char c)
+int	ft_isascii(int c)
 {
-	if (c > 0 && c <= 127)
+	if (c >= 0 && c <= 127)
 		return (1);
 	return (0);
 }

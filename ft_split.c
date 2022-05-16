@@ -6,11 +6,12 @@
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/04/26 00:30:09 by vescaffr         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:21:56 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 int	ft_countdest(char const *s, char c)
 {
@@ -18,21 +19,22 @@ int	ft_countdest(char const *s, char c)
 	int	j;
 
 	i = 0;
-	j = 1;
-	if (s[0] == c)
-		j = 0;
+	j = 0;
 	while (s[i] != '\0')
 	{
 		while (s[i] != c && s[i] != '\0')
 			i++;
-		i++;
-		if (s[i] != '\0')
+		if (s[i] != '\0' && s[i] == c)
 		{
 			while (s[i] == c)
 				i++;
 			j++;
 		}
 	}
+	if (s[0] != c && s[0] != '\0')
+		j++;
+	if (s[i - 1] == c)
+		j--;
 	return (j);
 }
 
@@ -42,7 +44,9 @@ char	*ft_filldest(char const *s, int i, int j)
 	int		n;
 
 	n = 0;
-	dest = malloc(sizeof(char *) * (i + 1));
+	dest = malloc(sizeof(char) * (i + 1));
+	if (!dest)
+		return (0);
 	j = j - i;
 	while (i > 0)
 	{
@@ -62,19 +66,20 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	dest = malloc(sizeof(char *) * ft_countdest(s, c) + 1);
+	dest = malloc(sizeof(char *) * (ft_countdest(s, c) + 1));
+	if (!dest)
+		return (0);
 	while (s[i] != '\0')
 	{
 		n = i;
 		while (s[i] != c && s[i] != '\0')
 			i++;
-		n = i - n;
 		if (i != 0)
 		{
-			dest[j] = ft_filldest(s, n, i);
+			dest[j] = ft_filldest(s, i - n, i);
 			j++;
 		}
-		while (s[i] == c)
+		while (s[i] == c && s[i] != '\0')
 			i++;
 	}
 	dest[j] = 0;
@@ -83,8 +88,8 @@ char	**ft_split(char const *s, char c)
 
 /*int	main()
 {
-	char str[100] = "/salut//ca va/oui   ";
-	char c = '/';
+	char str[100] = "--1-2--3---4----5-----42";
+	char c = '-';
 	printf("%s", ft_split(str, c)[0]);
 	printf("\n");
 	printf("%s", ft_split(str, c)[1]);

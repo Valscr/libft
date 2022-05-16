@@ -6,7 +6,7 @@
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:42:05 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/04/26 00:28:28 by vescaffr         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:51:38 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_destsize(int n)
 
 char	*ft_filldest(unsigned int nb, char *dest, int i, int size)
 {
-	while (nb >= 10)
+	while (size > 0)
 	{
 		dest[i++] = nb / ft_pow(10, size) + '0';
 		nb = nb - (nb / ft_pow(10, size) * ft_pow(10, size));
@@ -69,7 +69,7 @@ char	*ft_itoa(int n)
 
 	i = 0;
 	size = ft_destsize(n);
-	dest = malloc(sizeof(char *) * (size-- + 1));
+	dest = malloc(sizeof(char) * (size-- + 1));
 	if (!dest)
 		return (0);
 	if (n < 0)
