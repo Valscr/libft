@@ -6,7 +6,7 @@
 /*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/05/16 14:21:56 by vescaffr         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:01:03 by vescaffr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ char	**ft_split(char const *s, char c)
 
 /*int	main()
 {
-	char str[100] = "--1-2--3---4----5-----42";
-	char c = '-';
+	char str[100] = "chinimala";
+	char c = ' ';
 	printf("%s", ft_split(str, c)[0]);
 	printf("\n");
 	printf("%s", ft_split(str, c)[1]);
