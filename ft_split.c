@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vescaffr <vescaffr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2022/05/04 17:01:03 by vescaffr         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:11:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_countdest(char const *s, char c)
 
 	i = 0;
 	j = 0;
+	if (!s[i])
+		return (0);
 	while (s[i] != '\0')
 	{
 		while (s[i] != c && s[i] != '\0')
@@ -38,7 +40,7 @@ int	ft_countdest(char const *s, char c)
 	return (j);
 }
 
-char	*ft_filldest(char const *s, int i, int j)
+static char	*ft_filldest(char const *s, int i, int j)
 {
 	char	*dest;
 	int		n;
@@ -67,7 +69,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	dest = malloc(sizeof(char *) * (ft_countdest(s, c) + 1));
-	if (!dest)
+	if (!dest || !s)
 		return (0);
 	while (s[i] != '\0')
 	{
@@ -88,8 +90,8 @@ char	**ft_split(char const *s, char c)
 
 /*int	main()
 {
-	char str[100] = "chinimala";
-	char c = ' ';
+	char str[] = "";
+	char c = 'z';
 	printf("%s", ft_split(str, c)[0]);
 	printf("\n");
 	printf("%s", ft_split(str, c)[1]);

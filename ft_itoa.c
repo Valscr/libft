@@ -47,7 +47,7 @@ int	ft_destsize(int n)
 	return (size);
 }
 
-char	*ft_filldest(unsigned int nb, char *dest, int i, int size)
+static char	*ft_filldest(unsigned int nb, char *dest, int i, int size)
 {
 	while (size > 0)
 	{
